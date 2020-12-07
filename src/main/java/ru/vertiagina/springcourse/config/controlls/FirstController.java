@@ -4,6 +4,7 @@ import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class FirstController {
 
+
+    //create request object
     @GetMapping("")
     public String greeting(HttpServletRequest request){
         System.out.println( request.getParameter("name") );
@@ -21,8 +24,14 @@ public class FirstController {
         return "first/hello";
     }
 
+
+
+    //instead of creating request object, use @requestparam annotation
+    //for ONLY retrieving parameters
     @GetMapping("bye")
-    public String bye(){
+    public String bye(@RequestParam(value = "name", required = false) String name)
+    {
+        System.out.println(name);
         return "first/goodbye";
     }
 
